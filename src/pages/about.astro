@@ -1,12 +1,24 @@
 ---
-import MainLayout from '../layouts/AboutLayout.astro';
+// layout imports
+import MainLayout from '../layouts/MainLayout.astro';
+import MainContainer from '../layouts/MainContainer.astro';
+import InnerContainer from '../layouts/InnerContainer.astro';
+// component imports
 import Card from '../components/Card.astro';
 ---
 
 <MainLayout title="About:: Welcome to Astro.">
-	<main>
+  <main>
     <h1>About</h1>
-    <a href="#">Link here</a>
-	</main>
+    <p>
+      Web Developer, Technical Director, Project Manager, Department Head, Application Developer, Creative Director, Designer, IT Support, Server Admin, Database Admin, Marketing Director, Content Writer, Search Engine Optimization Consultant, Nay-sayer and Soapbox Speaker.
+    </p>
+    <p>
+      What I enjoy the most is freeing designers from the confines of technology.
+    </p>
+    <p>
+      Specialties: Client-side, Server-side and Database application programming with a focus on content managed web sites and applications.
+    </p>
+    <a href="#">Page Link here</a>
+  </main>
 </MainLayout>
-

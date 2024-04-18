@@ -8,11 +8,24 @@
 			rgb(var(--accent-light)) 30%,
 			white 60%
 		);
+		--accent-gradient-dark: linear-gradient(
+			45deg,
+			rgb(var(--accent)),
+			rgb(var(--accent-dark)) 30%,
+			#23262d 60%
+		);
 	}
 	html {
+		margin: 0 0 0 0;
+		padding: 0 0 0 0;
 		font-family: system-ui, sans-serif;
 		background: #13151a;
 		background-size: 224px;
+	}
+	body {
+		margin: 0 0 0 0;
+		padding: 0 0 0 0;
+    min-height: 100vh;
 	}
 	code {
 		font-family:
@@ -30,6 +43,7 @@
 		padding: 1rem;
 		width: 800px;
 		max-width: calc(100% - 2rem);
+		min-height: calc(100vh - 65px - 65px);
 		color: white;
 		font-size: 20px;
 		line-height: 1.6;
@@ -70,19 +84,23 @@
 		background-position: 0%;
 	}	
 	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+		display: flex;
+		flex-wrap: wrap;
+		// grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+		align-items: stretch;
 		gap: 2rem;
 		padding: 0;
 	}
   #copyright {
-    position: absolute;
-    bottom: 20px;
-    width: 100vw;
-    text-align: center;
+		flex-grow: 2;
+		flex-shrink: 1;
+		flex-basis: 33%;
+		width: fit-content;
+		text-align: center;
     color: grey;
 
     &.align-top {
+    	position: absolute;
       bottom: unset;
       top: 20px;
     }

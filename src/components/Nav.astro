@@ -1,0 +1,51 @@
+---
+// library imports
+import { Icon } from "astro-icon/components"; // https://www.astroicon.dev/getting-started/
+
+// component imports
+import Link from "./Link.astro";
+
+// data imports
+import navData from "../data/navData.js";
+---
+
+<nav class="main-menu" aria-label="Primary">
+  <ul class="navbar">
+    {
+      navData.map((navItem) =>(
+        <li>
+          <Link 
+            text={navItem.name}
+            href={navItem.path}
+            style='primary'
+            isFilled={false}
+            data-navLink
+            
+          />
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+<style lang="scss">
+  nav.main-menu {
+		flex-grow: 1;
+		flex-shrink: 1;
+    flex-basis: 33%;
+
+    ul.navbar {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: flex-end;
+      gap: 20px;
+
+      li {
+        list-style-type: none;
+      }
+    }
+  }
+</style>
+<script>
+  import "../js/nav.js";
+</script>

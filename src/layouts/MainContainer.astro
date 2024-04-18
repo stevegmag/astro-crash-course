@@ -1,0 +1,23 @@
+---
+// add container
+---
+
+<section class="main-container">
+  <slot />
+</section>
+
+<style lang="scss">
+  .main-container:before {
+    content: '';
+    display: block;
+    position: fixed;
+    top: 65px;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../images/icons/SteveG-bigcopy.svg');
+    background-repeat: no-repeat;
+    background-position: right top;
+    z-index: -1;
+    opacity: .3;
+  }
+</style>

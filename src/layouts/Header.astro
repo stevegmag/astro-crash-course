@@ -1,0 +1,60 @@
+---
+import Nav from "../components/Nav.astro";
+import Link from "../components/Link.astro";
+import { Icon } from "astro-icon/components"; // https://www.astroicon.dev/getting-started/
+
+---
+
+<header class="header">
+  <div class="logo-container">
+    <Link 
+      text='HOME'
+      href='/'
+      icon={{
+        name: "../images/icons/SteveG-bigcopy.svg",
+        position:  "replace",
+      }},
+      style='primary'
+      isFilled={false}
+      data-navLink
+      classes="logo" 
+      aria-label="Go to Homepage"
+      data-logoLink
+    >
+      <!-- <img src="../images/icons/SteveG-bigcopy.svg" alt="steveg" /> -->
+      <!-- <Icon name="../images/icons/SteveG-bigcopy.svg" position="replace" /> -->
+    </Link>
+
+  </div>
+  <Nav />s
+</header>
+
+<style lang="scss">
+  header.header {
+    position: sticky;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: 65px;
+    margin: 0 0 0 0;
+    padding: 0 5%;
+    background-color: lightgray;
+    box-shadow: 0 1px 10px grey;
+
+    .logo-container {
+      flex-shrink: 1;
+      flex-basis: 25%;
+
+      img {
+        width: auto;
+        max-height: 65px;
+      }
+    }
+  }
+
+</style>

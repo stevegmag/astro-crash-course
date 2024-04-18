@@ -1,24 +1,22 @@
 ---
+import { idText } from 'typescript';
+
 interface Props {
-	title: string;
-	body: string;
-	href: string;
+	dark?: boolean;
+	type?: "list-item" | "stand-alone"
 }
 
-const { href, title, body } = Astro.props;
+const { dark=false, type="list-item", } = Astro.props;
 ---
 
-<li class="link-card">
-	<a href={href}>
-		<h2>
-			{title}
-			<span>&rarr;</span>
-		</h2>
-		<p>
-			{body}
-		</p>
-	</a>
+<li class={`list-card ${dark && 'dark'}`}>
+	<slot></slot>
 </li>
+
+<!-- 
+<div class={`block-card ${dark && 'dark'}`}>
+	<slot></slot>
+</div> -->
 
 <style lang="scss">
 	@import "../styles/components/_card.scss";

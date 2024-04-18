@@ -1,14 +1,40 @@
-.link-card {
-		list-style: none;
-		display: flex;
-		padding: 1px;
+.list-card,
+.block-card {
+	list-style: none;
+	flex-basis: 50%;
+	// display: flex; 
+	display: block;
+	padding: .25rem 1rem 1rem 1rem;
+	background-color: white;
+	color: #23262d;
+	background-image: none;
+	background-size: 400%;
+	border-radius: 7px;
+	background-position: 100%;
+	transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+	box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+
+	&:is(:hover, :focus-within) {
+		background-position: 0;
+		background-image: var(--accent-gradient);
+	}
+	&:is(:hover, :focus-within) h2 {
+		color: rgb(var(--accent-light));
+	}
+
+	&.dark {
 		background-color: #23262d;
-		background-image: none;
-		background-size: 400%;
-		border-radius: 7px;
-		background-position: 100%;
+		color: white;
 		transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+		&:is(:hover, :focus-within) {
+			background-position: 0;
+			background-image: var(--accent-gradient-dark);
+		}
+		&:is(:hover, :focus-within) h2 {
+			color: rgb(var(--accent-light));
+		}
+	}
 	
 	& > a {
 		width: 100%;
@@ -20,7 +46,7 @@
 		background-color: #23262d;
 		opacity: 0.8;
 	}
-	h2 {
+	h2, h3 {
 		margin: 0;
 		font-size: 1.25rem;
 		transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
@@ -29,11 +55,26 @@
 		margin-top: 0.5rem;
 		margin-bottom: 0;
 	}
-	&:is(:hover, :focus-within) {
-		background-position: 0;
-		background-image: var(--accent-gradient);
-	}
-	&:is(:hover, :focus-within) h2 {
-		color: rgb(var(--accent-light));
+	button {
+		display: block;
+		width: 100%;
+		margin: 1.25rem;
+		padding: .25rem .5rem;
+		background-color: azure;
+		border-radius: 8px;
+		outline: 1px solid red;
+
+		a {
+			display: block;
+			width: 100%;
+			height: fit-content;
+			margin: 0;
+			padding: 0;
+			
+			&:active, &:hover {
+				color: mediumvioletred;
+			}
+		}
+
 	}
 }

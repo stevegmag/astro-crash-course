@@ -1,0 +1,53 @@
+---
+// library imports
+import { Icon } from "astro-icon/components"; // https://www.astroicon.dev/getting-started/
+
+interface Props {
+  text: string;
+  href: string;
+  style?: "primary" | "secondary";
+  icon?: {
+    name: string;
+    position: "left" | "right" | "above" | "below" | "replace";
+  };
+  isFilled?: boolean;
+  borderVisible?: boolean;
+  classes?: string;
+}
+
+const {
+  text,
+  href,
+  style,
+  icon,
+  isFilled = true,
+  borderVisible = false,
+  classes,
+  ...rest
+} = Astro.props as Props;
+---
+
+<a
+  href={href}
+  class:list={[
+    "link",
+    classes,
+    style,
+    { filled: isFilled, bordered: borderVisible },
+  ]}
+  {...rest}
+>
+  {
+    icon && (icon.position === "left" || icon.position === "above") && (
+      <Icon name={icon.name} class={`icon-${icon.position}`} />
+    )
+  }
+
+  <span>{text}</span>
+
+  {
+    icon && (icon.position === "right" || icon.position === "below") && (
+      <Icon name={icon.name} class={`icon-${icon.position}`} />
+    )
+  }
+</a>

@@ -1,0 +1,64 @@
+---
+// component imports
+import Nav from "../components/Nav.astro"
+import Copyright from "../components/Copyright.astro"
+import SocialLinks from "../components/SocialLinks.astro";
+
+
+// data imports
+import socialData from "../data/socialData.js";
+---
+
+<footer class="footer">
+  <div class="footer-details">
+    <ul class="app-card-list social-link-list">
+    {
+      socialData.map((socialData) => {
+        return (
+          <SocialLinks
+            name={socialData.name}
+            url={socialData.url}
+            image={socialData.image}
+          />
+        );
+      })
+    }
+  </ul>
+  </div>
+	<Copyright posclass=""/>
+  <Nav />
+</footer>
+
+<style lang="scss">
+  footer.footer {
+    position: sticky;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    bottom: 0;
+    left: 0;
+    width: auto;
+    height: 65px;
+    margin: 0 0 0 0;
+    padding: 0 5%;
+    background-color: lightgray;
+    box-shadow: 0 -1px -10px grey;
+
+    .footer-details {
+      flex-grow: 1;
+      flex-shrink: 1;
+      flex-basis: 33%;
+    }
+
+    .social-link-list {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+  }
+</style>

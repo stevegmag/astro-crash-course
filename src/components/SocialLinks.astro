@@ -1,0 +1,80 @@
+---
+export interface Props {
+  name: string;
+  url: string;
+  image: string;
+}
+
+const { name, url, image } = Astro.props;
+---
+
+<li class="social-card">
+  <a href={url} target="_blank">
+    <img src={image} alt={name} />
+    <h3 class="social-label">
+      {name}
+    </h3>
+  </a>
+</li>
+
+<style lang="scss">
+  .social-card {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    max-height: 65px;
+    width: 85px;
+    max-width: 85px;
+    margin: 0 0 0 0;
+    padding: 0.25rem;
+    background-color: white;
+    background-image: none;
+    background-size: 400%;
+    border-radius: 0.6rem;
+    background-position: 100%;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    text-align: center;
+
+    .social-label {
+      font-size: .95rem;
+      margin: 3px 0 0 0;
+
+    }
+    
+    & > a {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: auto;
+      padding: .15rem;
+      border-radius: 0.35rem;
+      background-color: white;
+      text-decoration: none;
+      color: #111;
+      opacity: 0.8;
+    }
+
+    img {
+      max-width: 20px;
+    }
+
+    &:is(:hover, :focus-within) {
+      background-position: 0;
+      background-image: var(--accent-gradient);
+    }
+    &:is(:hover, :focus-within) h2 {
+      color: var(--accent);
+    }
+  }
+
+</style>

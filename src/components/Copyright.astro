@@ -1,0 +1,11 @@
+---
+import { copyright } from '../js/utils';
+
+interface Props {
+	posclass?: string;
+}
+
+const { posclass = '' } = Astro.props;
+---
+
+<div id="copyright" class={ posclass }>{ copyright() }</div>
