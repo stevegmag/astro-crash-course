@@ -8,15 +8,16 @@ interface Props {
 
 const { dark=false, type="list-item", } = Astro.props;
 ---
-
-<li class={`list-card ${dark && 'dark'}`}>
-	<slot></slot>
-</li>
-
-<!-- 
-<div class={`block-card ${dark && 'dark'}`}>
-	<slot></slot>
-</div> -->
+{ type && type === "list-item" &&
+	<li class={`list-card ${dark && 'dark'}`}>
+		<slot></slot>
+	</li>
+}
+{ type && type === "stand-alone" &&
+	<div class={`block-card ${dark && 'dark'}`}>
+		<slot></slot>
+	</div>
+}
 
 <style lang="scss">
 	@import "../styles/components/_card.scss";

@@ -1,10 +1,86 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
+import Card from '../../components/Card.astro';
+
+const response = await fetch('https://dummyjson.com/products');
+const products = await response.json();
+
+export interface product {
+	id: number;
+	title: string;
+	description?: string;
+	price: number;
+	rating?: number;
+	stock: number;
+	brand?: string;
+	category?: string;
+	thumbnail?: string;
+	images?: string;
+}
 
 ---
 
-<MainLayout title="Blog">
+<MainLayout title="Da Merch, Baby!!">
 	<main>
 		<h1>The Finest Merch Around</h1>
+		{products.products.map( 
+			(product: product, index: number) => (
+			<a href={`/merch/${product.id}`} title={`Link to Post${product.title}`}>
+			<Card type="stand-alone" dark={index % 2? true : false}>
+				<h3>{product.title} - ${product.price}</h3>
+				<div class="rating star-rating"><span class="tiny-label">user rating:</span> {product.rating} / 5</div>
+				<div class="product-thumbnail"><img src={product.thumbnail} alt={product.title} /></div>
+				<div class="details">
+					<span class="tiny-label">Brand:</span> {product.brand} | <span class="tiny-label">Category:</span> {product.category}
+				</div>
+				<div class="description">{product.description}</div>
+			</Card>
+			</a>
+			)
+		)}
 	</main>
 </MainLayout>
+
+<style lang="scss">
+	a {
+		display: block;
+		margin: 20px;
+
+		&:first-child {
+			margin-top: 0;
+		}
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+	}
+	.tiny-label {
+		font-size: .65rem;
+		font-weight: 700;
+		text-transform: capitalize;
+	}
+	.details {
+		font-size: .85rem;
+		font-weight: 700;
+		text-transform: capitalize;
+	}
+	.product-thumbnail {
+		position: absolute;
+		top: 15px;
+		right: 15px;
+		width: 150px;
+		height: 150px;
+		max-height: 150px;
+		border-radius: 10px;
+		overflow: hidden;
+
+		img {
+			width: auto;
+			height: 100%;
+		}
+	}
+	.description {
+		margin: 1rem 0;
+		max-width: 65%;
+	}
+</style>

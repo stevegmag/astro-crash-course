@@ -42,8 +42,17 @@ const {
       <Icon name={icon.name} class={`icon-${icon.position}`} />
     )
   }
-
-  <span>{text}</span>
+  {
+    icon && (icon.position === "replace") && (
+      <span class="background-enabled" style={`background-image: url('${icon.name}')`}>{text}</span>
+    )
+  }  
+  { icon && (icon.position != "replace") && 
+    ( <span>icon {text}</span> )
+  }    
+  { !icon && 
+    ( <span>{text}</span> )
+  }  
 
   {
     icon && (icon.position === "right" || icon.position === "below") && (
@@ -51,3 +60,15 @@ const {
     )
   }
 </a>
+
+<style lang="scss">
+  .background-enabled {
+    display: block;
+    width: auto;
+    height: 75px;
+    background-position: left top;
+    background-repeat: no-repeat;
+    background-size: contain;
+    text-indent: -9999px;
+  }
+</style>

@@ -11,8 +11,8 @@ import { Icon } from "astro-icon/components"; // https://www.astroicon.dev/getti
       text='HOME'
       href='/'
       icon={{
-        name: "../images/icons/SteveG-bigcopy.svg",
-        position:  "replace",
+        name: "/images/icons/SteveG-bigcopy.svg",
+        position: "replace",
       }},
       style='primary'
       isFilled={false}
@@ -20,13 +20,13 @@ import { Icon } from "astro-icon/components"; // https://www.astroicon.dev/getti
       classes="logo" 
       aria-label="Go to Homepage"
       data-logoLink
-    >
+    />
       <!-- <img src="../images/icons/SteveG-bigcopy.svg" alt="steveg" /> -->
       <!-- <Icon name="../images/icons/SteveG-bigcopy.svg" position="replace" /> -->
-    </Link>
+    <!-- </Link> -->
 
   </div>
-  <Nav />s
+  <Nav />
 </header>
 
 <style lang="scss">
@@ -45,6 +45,7 @@ import { Icon } from "astro-icon/components"; // https://www.astroicon.dev/getti
     padding: 0 5%;
     background-color: lightgray;
     box-shadow: 0 1px 10px grey;
+    z-index: 9999;
 
     .logo-container {
       flex-shrink: 1;
