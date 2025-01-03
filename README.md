@@ -52,3 +52,17 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+
+## Tutorial List:
+  - 
+  - 
+
+## TODOS:
+- [X] Connect/Sync project to github
+- [ ] Astro
+- [ ] Configure CI/CD to send to all the hosts (branched)
+- [ ] Add to github pages
+- [ ] Add to vercel
+- [ ] Add to netlify
+- [ ] Add to dreamhost
