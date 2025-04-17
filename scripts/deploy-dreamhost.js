@@ -6,11 +6,12 @@ const execAsync = promisify(exec);
 
 const { host, user, path } = deployConfig.dreamhost.ssh;
 const localPath = './dist/';
-const remotePath = `${user}@${host}:${path}`;
+const remotePath = `${user}@${host}:${path}/`;
 
 async function deploy() {
   try {
     console.log('Starting deployment to Dreamhost via SSH...');
+    console.log(`Deploying from ${localPath} to ${remotePath}`);
     
     const rsyncCommand = [
       'rsync',
@@ -21,10 +22,11 @@ async function deploy() {
       remotePath        // destination
     ].join(' ');
 
+    console.log(`Executing command: ${rsyncCommand}`);
     const { stdout, stderr } = await execAsync(rsyncCommand);
     
-    if (stdout) console.log(stdout);
-    if (stderr) console.error(stderr);
+    if (stdout) console.log('Output:', stdout);
+    if (stderr) console.error('Errors:', stderr);
     
     console.log('Deployment completed successfully!');
   } catch (error) {

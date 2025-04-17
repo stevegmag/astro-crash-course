@@ -5,7 +5,7 @@ export default {
   },
   dreamhost: {
     base: '/',
-    url: 'https://astro-test.webonwater.com/',
+    url: 'https://astro-test.webonwater.com',
     ssh: {
       host: 'webonwater.com',
       user: process.env.DREAMHOST_SSH_USER,
