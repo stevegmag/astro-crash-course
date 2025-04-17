@@ -1,6 +1,4 @@
 ---
-import Icon from 'astro-icon/components';
-
 interface Props {
   text: string;
   href: string;
@@ -44,12 +42,12 @@ const fullHref = href.startsWith('http') ? href : `${basePath}${href.startsWith(
 >
   {
     icon && (icon.position === "left" || icon.position === "above") && (
-      <Icon name={icon.name} class={`icon-${icon.position}`} />
+      <img src={`${basePath}${icon.name}`} class={`icon-${icon.position}`} alt="" />
     )
   }
   {
     icon && (icon.position === "replace") && (
-      <span class="background-enabled" style={`background-image: url('${basePath}${icon.name.startsWith('/') ? icon.name.slice(1) : icon.name}')`}>{text}</span>
+      <img src={`${basePath}${icon.name}`} class="logo-image" alt={text} />
     )
   }  
   { icon && (icon.position != "replace") && 
@@ -61,19 +59,59 @@ const fullHref = href.startsWith('http') ? href : `${basePath}${href.startsWith(
 
   {
     icon && (icon.position === "right" || icon.position === "below") && (
-      <Icon name={icon.name} class={`icon-${icon.position}`} />
+      <img src={`${basePath}${icon.name}`} class={`icon-${icon.position}`} alt="" />
     )
   }
 </a>
 
 <style lang="scss">
-  .background-enabled {
-    display: block;
+  .link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: #7b68ee; // Updated default link color to mediumslateblue
+
+    &:hover {
+      color: yellow;
+    }
+    &:active {
+      color: tan;
+    }
+
+    // &.primary {
+    //   color: #7b68ee; // Updated primary color
+    // }
+
+    // &.secondary {
+    //   color: var(--color-text-secondary, #666);
+    // }
+
+    // &.filled {
+    //   background-color: var(--color-primary);
+    //   padding: 0.5rem 1rem;
+    //   border-radius: 0.25rem;
+    // }
+
+    // &.bordered {
+    //   border: 1px solid currentColor;
+    //   padding: 0.5rem 1rem;
+    //   border-radius: 0.25rem;
+    // }
+  }
+
+  .icon-left, .icon-right {
+    width: 1em;
+    height: 1em;
+  }
+
+  .icon-above, .icon-below {
+    width: 2em;
+    height: 2em;
+  }
+
+  .logo-image {
+    max-height: 65px; // Increased from 50px to 65px
     width: auto;
-    height: 75px;
-    background-position: left top;
-    background-repeat: no-repeat;
-    background-size: contain;
-    text-indent: -9999px;
   }
 </style>

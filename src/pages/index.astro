@@ -24,8 +24,9 @@ const posts = await response.json();
 		<h1>Welcome to <span class="text-gradient">SteveG Blog</span></h1>
 		<p class="instructions">
 			BUILT WITH ASTRO:: <br />
-			To get started, open the directory <code>src/pages</code> in your project.<br />
-			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above. (LOL. DONE)
+			This should be deployed to github pages and to a remote web server.
+			Content pulling from various remote dummy json sources. I am not responsible for any content.
+			Please note, this is for tech demos only, I have not checked the site for accessibility issues (like bad color choices - still getting an 84 from lighthouse :D).
 		</p>
 		<ul role="list" class="link-card-grid">
 			{posts.posts.map( 

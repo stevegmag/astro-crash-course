@@ -14,6 +14,8 @@
 			rgb(var(--accent-dark)) 30%,
 			#23262d 60%
 		);
+		--color-primary: lightgray;
+		--color-link: #7b68ee;
 	}
 	html {
 		margin: 0 0 0 0;
@@ -65,7 +67,7 @@
 		margin-bottom: 1em;
 	}
   a {
-    color: mediumslateblue;  
+    color: var(--color-link);  
     text-decoration: none;
 
     &:hover {
