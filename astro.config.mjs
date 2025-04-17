@@ -1,17 +1,13 @@
 import { defineConfig } from 'astro/config';
 import icon from "astro-icon";
+import deployConfig from './deploy.config.js';
 
-// Get the repository name from environment variable or use a default
-const REPO_NAME = 'your-repository-name'; // Replace with your actual repository name
-const BASE = process.env.BASE_PATH || `/${REPO_NAME}/`;
+const TARGET = process.env.DEPLOY_TARGET || 'github';
+const config = deployConfig[TARGET];
 
 export default defineConfig({
-  site: 'https://stevegmag.github.io',
-  base: BASE,
+  site: config.url,
+  base: config.base,
   output: 'static',
-  integrations: [
-    icon({
-      iconDir: "src/icons",
-    })
-  ]
+  integrations: [icon()]
 });
