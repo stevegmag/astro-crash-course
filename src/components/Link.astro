@@ -23,11 +23,19 @@ const {
   ...rest
 } = Astro.props as Props;
 
-const basePath = import.meta.env.BASE_URL.endsWith('/') 
-  ? import.meta.env.BASE_URL 
-  : `${import.meta.env.BASE_URL}/`;
+const basePath = import.meta.env.BASE_URL;
 
-const fullHref = href.startsWith('http') ? href : `${basePath}${href.startsWith('/') ? href.slice(1) : href}`;
+// Handle external links and internal paths
+const fullHref = href.startsWith('http') 
+  ? href 
+  : `${basePath}${href.startsWith('/') ? href.slice(1) : href}`;
+
+// Handle icon paths
+const getIconPath = (iconName: string) => {
+  return iconName.startsWith('http') 
+    ? iconName 
+    : `${basePath}${iconName.startsWith('/') ? iconName.slice(1) : iconName}`;
+};
 ---
 
 <a
@@ -42,12 +50,12 @@ const fullHref = href.startsWith('http') ? href : `${basePath}${href.startsWith(
 >
   {
     icon && (icon.position === "left" || icon.position === "above") && (
-      <img src={`${basePath}${icon.name}`} class={`icon-${icon.position}`} alt="" />
+      <img src={getIconPath(icon.name)} class={`icon-${icon.position}`} alt="" />
     )
   }
   {
     icon && (icon.position === "replace") && (
-      <img src={`${basePath}${icon.name}`} class="logo-image" alt={text} />
+      <img src={getIconPath(icon.name)} class="logo-image" alt={text} />
     )
   }  
   { icon && (icon.position != "replace") && 
@@ -59,7 +67,7 @@ const fullHref = href.startsWith('http') ? href : `${basePath}${href.startsWith(
 
   {
     icon && (icon.position === "right" || icon.position === "below") && (
-      <img src={`${basePath}${icon.name}`} class={`icon-${icon.position}`} alt="" />
+      <img src={getIconPath(icon.name)} class={`icon-${icon.position}`} alt="" />
     )
   }
 </a>
