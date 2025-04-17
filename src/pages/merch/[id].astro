@@ -1,55 +1,55 @@
 ---
-// import type { GetStaticPaths } from "astro";
 import MainLayout from '../../layouts/MainLayout.astro';
 import Card from '../../components/Card.astro';
 
 export async function getStaticPaths() {
-const response = await fetch('https://dummyjson.com/products');
-  const products = await response.json(); 
-	const paths = products.products.map((product: product) =>{
-		return { params: { id: products.id } }
-	});
-	return paths;
-}
-
-export interface product {
-	id: number;
-	title: string;
-	description?: string;
-	price: number;
-	rating?: number;
-	stock: number;
-	brand?: string;
-	category?: string;
-	thumbnail?: string;
-	images?: string;
+  try {
+    const response = await fetch('https://dummyjson.com/products');
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    const products = await response.json(); 
+    return products.products.map((product: product) => ({
+      params: { id: product.id.toString() }
+    }));
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    return [];
+  }
 }
 
 const { id } = Astro.params;
-const response = await fetch(`https://dummyjson.com/products/${id}`);
-// console.log('post:: ', post);
-const product = await response.json(); 
+let product;
+try {
+  const response = await fetch(`https://dummyjson.com/products/${id}`);
+  if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+  product = await response.json();
+} catch (error) {
+  console.error('Error fetching product:', error);
+  return Astro.redirect('/404');
+}
 ---
 
-<MainLayout title={`Blog post ${id}...`}>
-	<main>
-		<h3>{product.title} - ${product.price}</h3>
-		<div class="product-images">
-
-			<img src={product.images[0]} alt={product.title} />
-			<!-- {product.images.map(image => (
-				<img src={image} alt={product.title} />
-				)
-			)} -->
-		</div>
-		<div class="details">
-			<span class="tiny-label">Brand:</span> {product.brand} | 
-			<span class="tiny-label">Category:</span> {product.category} | 
-			<span class="tiny-label">In stock:</span> {product.stock}
-		</div>
-		<div class="description">{product.description}</div>
-		<button>Add to Cart</button>
-	</main>
+<MainLayout title={product ? `${product.title} - ${product.price}` : 'Product Not Found'}>
+  <main>
+    {product ? (
+      <>
+        <h3>{product.title} - ${product.price}</h3>
+        <div class="product-images">
+          {product.images?.[0] && (
+            <img src={product.images[0]} alt={product.title} />
+          )}
+        </div>
+        <div class="details">
+          <span class="tiny-label">Brand:</span> {product.brand} | 
+          <span class="tiny-label">Category:</span> {product.category} | 
+          <span class="tiny-label">In stock:</span> {product.stock}
+        </div>
+        <div class="description">{product.description}</div>
+        <button>Add to Cart</button>
+      </>
+    ) : (
+      <p>Product not found</p>
+    )}
+  </main>
 </MainLayout>
 
 <style lang="scss">

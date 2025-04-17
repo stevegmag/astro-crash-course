@@ -1,7 +1,7 @@
 const socialData = [
   {
     "name": "Github",
-    "url": "https://github.com/StevenG-Jellyfish", // StevenG-Jellyfish && stevegmag
+    "url": "https://github.com/stevegmag", // stevegmag
     "image": "/images/github.svg"
   },
   {
@@ -18,7 +18,7 @@ const socialData = [
   ,
   {
     "name": "Email",
-    "url": "mailto: steven.gallagher@jellyfish.com", // steven.gallagher@jellyfish.com && stevegmag@gmail.com
+    "url": "mailto: stevegmag@gmail.com", // stevegmag@gmail.com
     "image": "/images/envelope.svg"
   }
 ]

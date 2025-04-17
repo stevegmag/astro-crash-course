@@ -1,11 +1,12 @@
 import { defineConfig } from 'astro/config';
-
 import icon from "astro-icon";
 
-// https://astro.build/config
+// Get the base from environment variable or use default
+const BASE = process.env.BASE_PATH || '/';
+
 export default defineConfig({
-  site: 'https://stevegmag.github.io/',
-  base: 'astro-crash-course',
+  site: process.env.SITE_URL || 'https://stevegmag.github.io/',
+  base: BASE,
   output: 'static',
   integrations: [
     icon({
