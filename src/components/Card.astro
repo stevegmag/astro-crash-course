@@ -1,12 +1,10 @@
 ---
-import { idText } from 'typescript';
-
 interface Props {
 	dark?: boolean;
 	type?: "list-item" | "stand-alone"
 }
 
-const { dark=false, type="list-item", } = Astro.props;
+const { dark = false, type = "list-item" } = Astro.props;
 ---
 { type && type === "list-item" &&
 	<li class={`list-card ${dark && 'dark'}`}>

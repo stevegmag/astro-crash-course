@@ -2,7 +2,7 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import Card from '../../components/Card.astro';
 
-import { formatDate } from '../../js/utils.js';
+import { formatDate } from '../../js/utils.ts';
 
 export interface post {
 	id: number;
@@ -39,7 +39,7 @@ const posts = await response.json();
 							Math.floor(Math.random()*30)
 						))
 					}</div>
-					<div>{`${post.body.slice(0,95)}... `}</div>
+					<div>{`${post.body?.slice(0,95) ?? ''}... `}</div>
 				</Card>
 				</a>
 				)
