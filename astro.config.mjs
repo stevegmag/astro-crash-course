@@ -1,11 +1,12 @@
 import { defineConfig } from 'astro/config';
 import icon from "astro-icon";
 
-// Get the base from environment variable or use default
-const BASE = process.env.BASE_PATH || '/';
+// Get the repository name from environment variable or use a default
+const REPO_NAME = 'your-repository-name'; // Replace with your actual repository name
+const BASE = process.env.BASE_PATH || `/${REPO_NAME}/`;
 
 export default defineConfig({
-  site: process.env.SITE_URL || 'https://stevegmag.github.io/',
+  site: 'https://stevegmag.github.io',
   base: BASE,
   output: 'static',
   integrations: [

@@ -1,13 +1,12 @@
 ---
-// add container
+const basePath = import.meta.env.BASE_URL;
 ---
 
 <section class="main-container">
   <slot />
 </section>
 
-<style lang="scss">
-
+<style define:vars={{ basePath }}>
   .main-container {
     z-index: 1;
 
@@ -18,7 +17,7 @@
       top: 65px;
       width: 100%;
       height: 100%;
-      background-image: url('../../images/icons/SteveG-bigcopy.svg');
+      background-image: url('var(--basePath)images/icons/SteveG-bigcopy.svg');
       background-repeat: no-repeat;
       background-position: right top;
       z-index: -1;
