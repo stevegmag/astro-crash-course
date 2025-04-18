@@ -1,8 +1,8 @@
-name: Deploy Website
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["develop"]
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -27,7 +27,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Build and Deploy to GitHub Pages
       - name: Build for GitHub Pages
         env:
           DEPLOY_TARGET: github
@@ -40,27 +39,6 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
-
-      # Build and Deploy to Dreamhost
-      - name: Setup SSH for Dreamhost
-        uses: webfactory/ssh-agent@v0.8.0
-        with:
-          ssh-private-key: ${{ secrets.DREAMHOST_SSH_KEY }}
-
-      - name: Add Dreamhost to known hosts
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan -H webonwater.com >> ~/.ssh/known_hosts
-
-      - name: Build for Dreamhost
-        env:
-          DEPLOY_TARGET: dreamhost
-        run: npm run build
-
-      - name: Deploy to Dreamhost
-        env:
-          DREAMHOST_SSH_USER: ${{ secrets.DREAMHOST_SSH_USER }}
-        run: npm run deploy:dreamhost
 
   deploy-github:
     environment:
