@@ -13,7 +13,7 @@ dotenv.config({ path: join(dirname(__dirname), '.env') });
 
 const execAsync = promisify(exec);
 
-const { host, user, path } = deployConfig.dreamhost.ssh;
+const { host, path } = deployConfig.dreamhost.ssh;
 const sshUser = process.env.DREAMHOST_SSH_USER;
 
 if (!sshUser) {

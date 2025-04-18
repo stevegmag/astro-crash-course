@@ -3,14 +3,14 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
+    "dev": "DEPLOY_TARGET=local astro dev",
+    "start": "DEPLOY_TARGET=local astro dev",
+    "build": "DEPLOY_TARGET=local astro check && astro build",
+    "preview": "DEPLOY_TARGET=local astro preview",
     "astro": "astro",
-    "build:github": "DEPLOY_TARGET=github astro build",
-    "build:dreamhost": "DEPLOY_TARGET=dreamhost astro build",
-    "deploy:local": "npm run build && npm run preview",
+    "build:github": "DEPLOY_TARGET=github astro check && astro build",
+    "build:dreamhost": "DEPLOY_TARGET=dreamhost astro check && astro build",
+    "deploy:local": "DEPLOY_TARGET=local npm run build && npm run preview",
     "deploy:dreamhost": "DEPLOY_TARGET=dreamhost astro build && node scripts/deploy-dreamhost.js"
   },
   "dependencies": {
@@ -24,5 +24,3 @@
     "sass": "^1.75.0"
   }
 }
-
-

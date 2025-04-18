@@ -2,8 +2,8 @@ import { defineConfig } from 'astro/config';
 import icon from "astro-icon";
 import deployConfig from './deploy.config.js';
 
-const TARGET = process.env.DEPLOY_TARGET || 'github';
-const config = deployConfig[TARGET];
+const TARGET = process.env.DEPLOY_TARGET || 'local';
+const config = deployConfig[TARGET] || deployConfig.local;
 
 // Ensure base path always starts and ends with /
 const basePath = config.base.startsWith('/') ? config.base : `/${config.base}`;
