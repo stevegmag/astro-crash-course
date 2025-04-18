@@ -10,11 +10,6 @@ export interface quote {
   quote: string;
   author: string;
 }
-
-
-const response = await fetch('https://dummyjson.com/quotes/random');
-const quote = await response.json();
-console.log('quote:: ', quote);
 ---
 
 <MainLayout title="About:: Welcome to Astro.">
@@ -24,17 +19,18 @@ console.log('quote:: ', quote);
       Web Developer, Technical Director, Project Manager, Department Head, Application Developer, Creative Director, Designer, IT Support, Server Admin, Database Admin, Marketing Director, Content Writer, Search Engine Optimization Consultant, Nay-sayer and Soapbox Speaker.
     </p>
     <p>
-      What I enjoy the most is freeing designers from the confines of technology.
+      What I enjoy the most is freeing clients and designers from the confines of technology.
     </p>
     <p>
       Specialties: Client-side, Server-side and Database application programming with a focus on content managed web sites and applications... oh! and ASTRO of course.
     </p>
-    {quote && (
-      <Card> 
-            <h3>{quote.quote}</h3>
-            <div class="quote-attribution">- {quote.author}</div>
+    <!-- Add id to Card for JavaScript targeting -->
+    <div id="quote-container">
+      <Card>
+        <h3 id="quote-text">Loading...</h3>
+        <div id="quote-attribution" class="quote-attribution">- </div>
       </Card>
-    )}
+    </div>
     <p>
       <a href="#">Page Link here</a>
     </p>
@@ -48,3 +44,21 @@ console.log('quote:: ', quote);
     text-align: right;
   }
 </style>
+
+<script>
+  async function fetchRandomQuote() {
+    try {
+      const response = await fetch('https://dummyjson.com/quotes/random');
+      const quote = await response.json();
+      
+      document.getElementById('quote-text').textContent = quote.quote;
+      document.getElementById('quote-attribution').textContent = `- ${quote.author}`;
+    } catch (error) {
+      console.error('Error fetching quote:', error);
+      document.getElementById('quote-text').textContent = 'Failed to load quote';
+    }
+  }
+
+  // Fetch on page load
+  fetchRandomQuote();
+</script>
