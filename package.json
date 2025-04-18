@@ -8,19 +8,22 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "build:github": "DEPLOY_TARGET=github astro build",
+    "build:dreamhost": "DEPLOY_TARGET=dreamhost astro build",
     "deploy:local": "npm run build && npm run preview",
-    "deploy:gh-pages": "npm run build && gh-pages -d dist",
-    "deploy:dreamhost": "npm run build && node scripts/deploy-dreamhost.js"
+    "deploy:github": "npm run build:github",
+    "deploy:dreamhost": "npm run build:dreamhost && node scripts/deploy-dreamhost.js"
   },
   "dependencies": {
     "@astrojs/check": "^0.5.10",
     "astro": "^4.6.1",
     "astro-icon": "^1.1.0",
+    "dotenv": "^16.3.1",
     "typescript": "^5.4.5"
   },
   "devDependencies": {
-    "sass": "^1.75.0",
-    "ftp-deploy": "^2.4.7",
-    "gh-pages": "^6.3.0"
+    "sass": "^1.75.0"
   }
 }
+
+

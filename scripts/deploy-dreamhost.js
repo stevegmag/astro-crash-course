@@ -1,12 +1,28 @@
 import { exec } from 'child_process';
 import { promisify } from 'util';
 import deployConfig from '../deploy.config.js';
+import * as dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+// Get the directory path of the current module
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+// Load environment variables from .env file
+dotenv.config({ path: join(dirname(__dirname), '.env') });
 
 const execAsync = promisify(exec);
 
 const { host, user, path } = deployConfig.dreamhost.ssh;
+const sshUser = process.env.DREAMHOST_SSH_USER;
+
+if (!sshUser) {
+  console.error('Error: DREAMHOST_SSH_USER environment variable is not set');
+  process.exit(1);
+}
+
 const localPath = './dist/';
-const remotePath = `${user}@${host}:${path}/`;
+const remotePath = `${sshUser}@${host}:${path}/`;
 
 async function deploy() {
   try {
