@@ -16,12 +16,13 @@
 		);
 		--color-primary: lightgray;
 		--color-link: #7b68ee;
+		--color-background: #444;
 	}
 	html {
 		margin: 0 0 0 0;
 		padding: 0 0 0 0;
 		font-family: system-ui, sans-serif;
-		background: #13151a;
+		background: var(--color-background);
 		background-size: 224px;
 	}
 	body {
@@ -92,6 +93,13 @@
 		align-items: stretch;
 		gap: 2rem;
 		padding: 0;
+
+		a {
+			display: block;
+			min-width: 100%;
+			box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+				0 2px 4px -2px rgba(0, 0, 0, 0.1);
+		}
 	}
   #copyright {
 		flex-grow: 2;
