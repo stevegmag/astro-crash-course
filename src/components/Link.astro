@@ -1,14 +1,11 @@
 ---
-// library imports
-import { Icon } from "astro-icon/components"; // https://www.astroicon.dev/getting-started/
-
 interface Props {
   text: string;
   href: string;
-  style?: "primary" | "secondary";
+  style: string;
   icon?: {
     name: string;
-    position: "left" | "right" | "above" | "below" | "replace";
+    position: string;
   };
   isFilled?: boolean;
   borderVisible?: boolean;
@@ -25,10 +22,24 @@ const {
   classes,
   ...rest
 } = Astro.props as Props;
+
+const basePath = import.meta.env.BASE_URL;
+
+// Handle external links and internal paths
+const fullHref = href.startsWith('http') 
+  ? href 
+  : `${basePath}${href.startsWith('/') ? href.slice(1) : href}`;
+
+// Handle icon paths
+const getIconPath = (iconName: string) => {
+  return iconName.startsWith('http') 
+    ? iconName 
+    : `${basePath}${iconName.startsWith('/') ? iconName.slice(1) : iconName}`;
+};
 ---
 
 <a
-  href={href}
+  href={fullHref}
   class:list={[
     "link",
     classes,
@@ -39,16 +50,16 @@ const {
 >
   {
     icon && (icon.position === "left" || icon.position === "above") && (
-      <Icon name={icon.name} class={`icon-${icon.position}`} />
+      <img src={getIconPath(icon.name)} class={`icon-${icon.position}`} alt="" />
     )
   }
   {
     icon && (icon.position === "replace") && (
-      <span class="background-enabled" style={`background-image: url('${icon.name}')`}>{text}</span>
+      <img src={getIconPath(icon.name)} class="logo-image" alt={text} />
     )
   }  
   { icon && (icon.position != "replace") && 
-    ( <span>icon {text}</span> )
+    ( <span>{text}</span> )
   }    
   { !icon && 
     ( <span>{text}</span> )
@@ -56,19 +67,59 @@ const {
 
   {
     icon && (icon.position === "right" || icon.position === "below") && (
-      <Icon name={icon.name} class={`icon-${icon.position}`} />
+      <img src={getIconPath(icon.name)} class={`icon-${icon.position}`} alt="" />
     )
   }
 </a>
 
 <style lang="scss">
-  .background-enabled {
-    display: block;
+  .link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: #7b68ee; // Updated default link color to mediumslateblue
+
+    &:hover {
+      color: yellow;
+    }
+    &:active {
+      color: tan;
+    }
+
+    // &.primary {
+    //   color: #7b68ee; // Updated primary color
+    // }
+
+    // &.secondary {
+    //   color: var(--color-text-secondary, #666);
+    // }
+
+    // &.filled {
+    //   background-color: var(--color-primary);
+    //   padding: 0.5rem 1rem;
+    //   border-radius: 0.25rem;
+    // }
+
+    // &.bordered {
+    //   border: 1px solid currentColor;
+    //   padding: 0.5rem 1rem;
+    //   border-radius: 0.25rem;
+    // }
+  }
+
+  .icon-left, .icon-right {
+    width: 1em;
+    height: 1em;
+  }
+
+  .icon-above, .icon-below {
+    width: 2em;
+    height: 2em;
+  }
+
+  .logo-image {
+    max-height: 65px; // Increased from 50px to 65px
     width: auto;
-    height: 75px;
-    background-position: left top;
-    background-repeat: no-repeat;
-    background-size: contain;
-    text-indent: -9999px;
   }
 </style>

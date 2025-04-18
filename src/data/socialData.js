@@ -1,25 +1,25 @@
 const socialData = [
   {
     "name": "Github",
-    "url": "https://github.com/StevenG-Jellyfish", // StevenG-Jellyfish && stevegmag
-    "image": "/images/github.svg"
+    "url": "https://github.com/stevegmag",
+    "image": import.meta.env.BASE_URL + "images/github.svg"
   },
   {
     "name": "LinkedIn",
     "url": "https://www.linkedin.com/in/stevengallagher/",
-    "image": "/images/linkedin.svg"
+    "image": import.meta.env.BASE_URL + "images/linkedin.svg"
   }
   ,
   {
     "name": "CodePen",
     "url": "https://codepen.io/stevegmag",
-    "image": "/images/codepen.png"
+    "image": import.meta.env.BASE_URL + "images/codepen.png"
   }
   ,
   {
     "name": "Email",
-    "url": "mailto: steven.gallagher@jellyfish.com", // steven.gallagher@jellyfish.com && stevegmag@gmail.com
-    "image": "/images/envelope.svg"
+    "url": "mailto: stevegmag@gmail.com",
+    "image": import.meta.env.BASE_URL + "images/envelope.svg"
   }
 ]
 

@@ -2,7 +2,9 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import Card from '../../components/Card.astro';
 
-import { formatDate } from '../../js/utils.js';
+import { formatDate } from '../../js/utils.ts';
+
+const basePath = import.meta.env.BASE_URL;
 
 export interface post {
 	id: number;
@@ -28,7 +30,7 @@ const posts = await response.json();
 		<ul role="list" class="link-card-grid">
 			{posts.posts.map( 
 				(post: post, index: number) => (
-				<a href={`/blog/posts/${post.id}`} title={`Link to Post${post.title}`}>
+				<a href={`${basePath}blog/posts/${post.id}`} title={`Link to Post${post.title}`}>
 				<Card dark={index % 2? true : false}>
 					<h3>{post.title}</h3>
 					<div>Published (random made-up date): 
@@ -39,7 +41,7 @@ const posts = await response.json();
 							Math.floor(Math.random()*30)
 						))
 					}</div>
-					<div>{`${post.body.slice(0,95)}... `}</div>
+					<div>{`${post.body?.slice(0,95) ?? ''}... `}</div>
 				</Card>
 				</a>
 				)
